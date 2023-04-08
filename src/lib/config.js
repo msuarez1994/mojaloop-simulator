@@ -32,5 +32,5 @@ const path = require('path');
 module.exports = async (configFile = '.env') => {
     return require('dotenv').config({
         path: path.resolve(process.cwd(), configFile)
-    });
+    },{silent: true});
 };
