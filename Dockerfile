@@ -12,6 +12,8 @@ COPY package.json package-lock.json* /opt/app/
 RUN npm ci
 
 COPY src /opt/app/src
+COPY example.env /opt/app/.env
+COPY rules/ /opt/app/rules
 
 FROM node:16.15.0-alpine
 WORKDIR /opt/app/
@@ -26,6 +28,7 @@ USER app-user
 
 COPY --chown=app-user --from=builder /opt/app/ .
 RUN npm prune --production
+
 
 EXPOSE 3000 3001 3003
 CMD ["npm", "run", "start"]
